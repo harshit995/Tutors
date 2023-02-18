@@ -1,5 +1,5 @@
 const userModel = require("../models/userModel")
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 //user register
 exports.registerfunc = async (req, res) => {
@@ -35,4 +35,35 @@ exports.registerfunc = async (req, res) => {
         console.log("catch block error")
     }
 };
+
+exports.loginfunc = async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
+        res.status(400).json("incorrect login credentials..")
+    }
+    try {
+        const user = await userModel.findOne({ email: email })
+        if (user) {
+            const isMatch = await bcrypt.compare(password, user.password)
+            if (!isMatch) {
+                res.status(400).json("incorrect details...")
+            } else {
+                const token = await user.generateAuthToken();
+                console.log(token)
+
+                res.cookie("jwtoken", token, {
+                    expires: new Date(Date.now() + 25892000000),
+                    httpOnly: true
+                })
+
+                res.status(200).json("Login Successfully...")
+            }
+
+        } else {
+            res.status(400).json("incorrect details...")
+        }
+    } catch (error) {
+        res.status(400).json("Error in login..")
+    }
+}
 
