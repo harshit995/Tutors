@@ -48,11 +48,11 @@ exports.loginfunc = async (req, res) => {
             if (!isMatch) {
                 res.status(400).json("incorrect details...")
             } else {
-                const token = await user.generateAuthToken();
-                console.log(token)
+                token = await user.generateAuthToken();
+                console.log("the token is...", token)
 
                 res.cookie("jwtoken", token, {
-                    expires: new Date(Date.now() + 25892000000),
+                    expires: new Date(Date.now() + 2512000000),
                     httpOnly: true
                 })
 
@@ -65,5 +65,9 @@ exports.loginfunc = async (req, res) => {
     } catch (error) {
         res.status(400).json("Error in login..")
     }
+}
+
+exports.getuserdata = async (req, res) => {
+    res.send(req.rootuser)
 }
 
