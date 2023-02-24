@@ -9,4 +9,5 @@ router.post("/login", controllers.loginfunc)
 router.get('/getuserdata', Authenticate, controllers.getuserdata)
 
 
+
 module.exports = router

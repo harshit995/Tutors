@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Card from "react-bootstrap/Card"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -6,12 +6,15 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Row from 'react-bootstrap/Row';
 import login from "../images/login.png"
 import { loginfunc } from '../services/Apis';
+import { authContext } from '../components/context/ContextProvider';
 
 
 const Login = () => {
     let navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const { user, setUser } = useContext(authContext);
 
 
     const loginUser = async (e) => {
@@ -26,6 +29,9 @@ const Login = () => {
         if (response.status === 200) {
             setEmail("")
             setPassword("")
+            setUser({ ...response.data })
+            console.log("user is..")
+            console.log(user)
             navigate('/')
         }
 
