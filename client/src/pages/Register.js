@@ -6,9 +6,10 @@ import { NavLink } from "react-router-dom";
 import Row from 'react-bootstrap/Row';
 import register from "../images/signup.png"
 import man from "../images/man.png"
-import "../style.css/register.css"
+import "../style/register.css"
 import { registerfunc } from "../services/Apis"
 import { ToastContainer, toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom"
 // import Select from 'react-select';
 

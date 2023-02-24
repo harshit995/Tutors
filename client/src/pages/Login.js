@@ -5,8 +5,10 @@ import Form from 'react-bootstrap/Form';
 import { NavLink, useNavigate } from "react-router-dom";
 import Row from 'react-bootstrap/Row';
 import login from "../images/login.png"
+import 'react-toastify/dist/ReactToastify.css';
 import { loginfunc } from '../services/Apis';
 import { authContext } from '../components/context/ContextProvider';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 const Login = () => {
@@ -19,23 +21,33 @@ const Login = () => {
 
     const loginUser = async (e) => {
         e.preventDefault();
-        const data = new FormData();
 
-        data.append("email", email)
-        data.append("password", password)
-
-        const response = await loginfunc(data);
-
-        if (response.status === 200) {
-            setEmail("")
-            setPassword("")
-            setUser({ ...response.data })
-            console.log("user is..")
-            console.log(user)
-            navigate('/')
+        if (email === "") {
+            toast.error("Email is Required !")
+        } else if (!email.includes("@")) {
+            toast.error("Enter Valid Email !")
         }
+        else {
+            const data = new FormData();
 
+            data.append("email", email)
+            data.append("password", password)
 
+            const response = await loginfunc(data);
+
+            if (response.status === 200) {
+                setEmail("")
+                setPassword("")
+                setUser({ ...response.data })
+                console.log("user is..")
+                console.log(user)
+                navigate('/')
+            }
+            else {
+                toast.error("Enter Valid details!")
+            }
+
+        }
     }
     return (
         <div className="container">
@@ -69,6 +81,7 @@ const Login = () => {
                     New User
                 </NavLink>
             </div>
+            <ToastContainer position="top-center" />
         </div>
     )
 }
