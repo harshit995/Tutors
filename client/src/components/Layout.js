@@ -51,10 +51,19 @@ const Layout = ({ children }) => {
                     <div className="content">
                         <div className="header">
                             <div className="header-content">
-                                <i class="fa-solid fa-bell"></i>
 
                                 {/* <Badge style={{ marginBottom: "28px", marginRight: "20px" }} count={user?.notification.length}></Badge> */}
-                                <Badge style={{ marginBottom: "28px", marginRight: "20px" }} bg="secondary">{user?.notification.length}</Badge>
+                                <i onClick={() => {
+                                    navigate('/notification')
+                                }}
+                                    style={{ cursor: "pointer" }}
+                                    className="fa-solid fa-bell"></i>
+                                <Badge onClick={() => {
+                                    navigate('/notification')
+                                }}
+                                    style={{ cursor: "pointer", marginBottom: "28px", marginRight: "20px" }} bg="secondary">{user?.notification.length}
+
+                                </Badge>
                                 <NavLink className="text-decoration-none " to='/profile'>{user?.name}</NavLink>
                             </div>
                         </div>

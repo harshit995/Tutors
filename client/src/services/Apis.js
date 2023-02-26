@@ -24,6 +24,17 @@ export const applytutfunc = async (data, header) => {
     return await commonrequest("POST", `${BASE_URL}/applytutor`, data, header);
 }
 
+export const getmarkallreadfunc = async (data) => {
+    return await commonrequest("POST", `${BASE_URL}/getallnotification`, data, "");
+}
+
+export const getdeletefunc = async (data) => {
+    return await commonrequest("POST", `${BASE_URL}/deleteallnotification`, data, "");
+}
+
+export const getallusersfunc = async () => {
+    return await commonrequest("GET", `${BASE_URL}/getallusers`, {});
+}
 // export const editfunc = async (id, data, header) => {
 //     return await commonrequest("PUT", `${BASE_URL}/user/edit/${id}`, data, header);
 // }

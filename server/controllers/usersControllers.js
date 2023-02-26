@@ -71,6 +71,7 @@ exports.loginfunc = async (req, res) => {
 exports.getuserdata = async (req, res) => {
     res.send(req.rootuser)
 }
+
 exports.tutorapplyfunc = async (req, res) => {
     const file = req.file.filename;
     const { firstname, lastname, email, age, phone, website, address, specialization, experience, feesPerStudent, timings } = req.body;
@@ -112,6 +113,40 @@ exports.tutorapplyfunc = async (req, res) => {
     }
     catch (error) {
         res.status(400).send("Apply Tutor error....")
+    }
+}
+
+
+exports.notificationcontroller = async (req, res) => {
+    try {
+        const user = await userModel.findOne({ _id: req.body.userId });
+        const seennotification = user.seennotification;
+        const notification = user.notification;
+        seennotification.push(...notification);
+        user.notification = [];
+        user.seennotification = notification;
+        const updatedUser = await user.save();
+        res.status(200).send(updatedUser);
+    }
+    catch (error) {
+        res.status(400).send("Notification error....")
+    }
+}
+
+exports.deleteallnotificationcontroller = async (req, res) => {
+    try {
+        console.log("before delete..")
+        const user = await userModel.findOne({ _id: req.body.userId });
+        console.log("after...")
+        console.log(req.body.userId)
+        user.seennotification = [];
+        user.notification = [];
+        const updatedUser = await user.save();
+        updatedUser.password = undefined;
+        res.status(200).send(updatedUser);
+    }
+    catch (error) {
+        res.status(400).send("delete error....")
     }
 }
 
