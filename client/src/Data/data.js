@@ -11,7 +11,7 @@ export const userMenu = [
     },
     {
         name: 'Apply Tutor',
-        path: '/apply-tutor',
+        path: '/applytutor',
         icon: "fa-solid fa-user-doctor"
     },
     {

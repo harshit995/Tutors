@@ -20,6 +20,10 @@ export const logoutfunc = async () => {
     return await commonrequest("GET", `${BASE_URL}/logout`, {});
 }
 
+export const applytutfunc = async (data, header) => {
+    return await commonrequest("POST", `${BASE_URL}/applytutor`, data, header);
+}
+
 // export const editfunc = async (id, data, header) => {
 //     return await commonrequest("PUT", `${BASE_URL}/user/edit/${id}`, data, header);
 // }

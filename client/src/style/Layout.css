@@ -91,3 +91,9 @@
     font-size: 1.2rem;
     text-transform: uppercase;
 }
+
+.profile_div img {
+    max-width: 56px;
+    border-radius: 50%;
+    border: 1px solid black;
+}

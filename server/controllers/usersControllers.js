@@ -1,5 +1,6 @@
 const userModel = require("../models/userModel")
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const tutorModel = require("../models/tutorModel");
 
 //user register
 exports.registerfunc = async (req, res) => {
@@ -55,7 +56,7 @@ exports.loginfunc = async (req, res) => {
                     expires: new Date(Date.now() + 2512000000),
                     httpOnly: true
                 })
-
+                user.password = undefined;
                 res.status(200).json(user)
             }
 
@@ -69,6 +70,49 @@ exports.loginfunc = async (req, res) => {
 
 exports.getuserdata = async (req, res) => {
     res.send(req.rootuser)
+}
+exports.tutorapplyfunc = async (req, res) => {
+    const file = req.file.filename;
+    const { firstname, lastname, email, age, phone, website, address, specialization, experience, feesPerStudent, timings } = req.body;
+
+    if (!firstname || !lastname || !email || !phone || !address || !specialization || !experience || !feesPerStudent || !timings || !age || !file) {
+        return res.status(400).json("fill all the fields...")
+    }
+
+    try {
+        const existingUser = await tutorModel.findOne({ email: email });
+
+        if (existingUser) {
+            res.status(401).json("user already exist..")
+        }
+        else {
+            const newTutor = new tutorModel({
+                firstname, lastname, email, age, phone, website, address, specialization, experience, feesPerStudent, timings, status: "pending", profile: file
+            })
+            console.log("else part")
+            await newTutor.save();
+            console.log("after save")
+            console.log("new tutor is ..")
+            console.log(newTutor)
+            const adminUser = await userModel.findOne({ isAdmin: true })
+            const notification = adminUser.notification
+            notification.push({
+                type: 'apply-tutor-request',
+                message: `${newTutor.firstname} ${newTutor.lastname} Has Applied For a Tutor Account`,
+                data: {
+                    tutorId: newTutor._id,
+                    name: newTutor.firstname + " " + newTutor.lastname,
+                    onClickpath: '/admin/tutors'
+                }
+            })
+            await userModel.findByIdAndUpdate(adminUser._id, { notification });
+            res.status(200).json(newTutor)
+
+        }
+    }
+    catch (error) {
+        res.status(400).send("Apply Tutor error....")
+    }
 }
 
 
