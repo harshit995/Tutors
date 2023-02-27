@@ -35,6 +35,10 @@ export const getdeletefunc = async (data) => {
 export const getallusersfunc = async () => {
     return await commonrequest("GET", `${BASE_URL}/getallusers`, {});
 }
+
+export const getalltutorsfunc = async () => {
+    return await commonrequest("GET", `${BASE_URL}/getalltutors`, {});
+}
 // export const editfunc = async (id, data, header) => {
 //     return await commonrequest("PUT", `${BASE_URL}/user/edit/${id}`, data, header);
 // }
