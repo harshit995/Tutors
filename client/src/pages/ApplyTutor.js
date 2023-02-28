@@ -91,7 +91,7 @@ const ApplyTutor = () => {
             const config = {
                 "Content-Type": "multipart/form-data"
             }
-
+            console.log(userId)
             const response = await applytutfunc(data, config);
             console.log(response)
 
@@ -142,54 +142,54 @@ const ApplyTutor = () => {
                         <Row>
                             <h4>Personal Details</h4>
                             <hr />
-                            <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail" >
+                            <Form.Group className="mb-3 col-lg-6"  >
                                 <Form.Label>First name</Form.Label>
                                 <Form.Control type="text" name='firstname' value={inputdata.firstname} onChange={setInputValue} placeholder='Enter FirstName' />
                             </Form.Group>
-                            <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
+                            <Form.Group className="mb-3 col-lg-6" >
                                 <Form.Label>Last Name</Form.Label>
                                 <Form.Control type="text" name='lastname' value={inputdata.lastname} onChange={setInputValue} placeholder='Enter LastName' />
                             </Form.Group>
-                            <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
+                            <Form.Group className="mb-3 col-lg-6" >
                                 <Form.Label>Email address</Form.Label>
                                 <Form.Control type="email" name='email' value={inputdata.email} onChange={setInputValue} placeholder='Enter Email' />
                             </Form.Group>
-                            <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
+                            <Form.Group className="mb-3 col-lg-6" >
                                 <Form.Label>Mobile</Form.Label>
                                 <Form.Control type="number" name='phone' value={inputdata.phone} onChange={setInputValue} placeholder='Enter Mobile' />
                             </Form.Group>
-                            <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
+                            <Form.Group className="mb-3 col-lg-6" >
                                 <Form.Label>Select Your Profile</Form.Label>
                                 <Form.Control type="file" name='doc_profile' onChange={setProfile} placeholder='Select Your Profile' />
                             </Form.Group>
-                            <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
+                            <Form.Group className="mb-3 col-lg-6" >
                                 <Form.Label>Enter Your Location</Form.Label>
                                 <Form.Control type="text" name='address' value={inputdata.address} onChange={setInputValue} placeholder='Enter Your Location' />
                             </Form.Group>
-                            <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
+                            <Form.Group className="mb-3 col-lg-6" >
                                 <Form.Label>Enter Your Age</Form.Label>
                                 <Form.Control type="text" name='age' value={inputdata.age} onChange={setInputValue} placeholder='Enter Your Age' />
                             </Form.Group>
-                            <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
+                            <Form.Group className="mb-3 col-lg-6" >
                                 <Form.Label>Enter Your Website</Form.Label>
                                 <Form.Control type="text" name='website' value={inputdata.website} onChange={setInputValue} placeholder='Enter Your website' />
                             </Form.Group>
 
                             <h4>Professional Details</h4>
                             <hr />
-                            <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
+                            <Form.Group className="mb-3 col-lg-6" >
                                 <Form.Label>Enter Your specialization</Form.Label>
                                 <Form.Control type="text" name='specialization' value={inputdata.specialization} onChange={setInputValue} placeholder='Enter Your specialization' />
                             </Form.Group>
-                            <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
+                            <Form.Group className="mb-3 col-lg-6" >
                                 <Form.Label>Enter Your experience</Form.Label>
                                 <Form.Control type="text" name='experience' value={inputdata.experience} onChange={setInputValue} placeholder='Enter Your experience' />
                             </Form.Group>
-                            <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
+                            <Form.Group className="mb-3 col-lg-6" >
                                 <Form.Label>Enter Your feesPerStudent</Form.Label>
                                 <Form.Control type="text" name='feesPerStudent' value={inputdata.feesPerStudent} onChange={setInputValue} placeholder='Enter Your feesPerStudent' />
                             </Form.Group>
-                            <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
+                            <Form.Group className="mb-3 col-lg-6" >
                                 <Form.Label>Enter Your timings</Form.Label>
                                 <Form.Control type="text" name='timings' value={inputdata.timings} onChange={setInputValue} placeholder='Enter Your timings' />
                             </Form.Group>

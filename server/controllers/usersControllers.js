@@ -74,7 +74,7 @@ exports.getuserdata = async (req, res) => {
 
 exports.tutorapplyfunc = async (req, res) => {
     const file = req.file.filename;
-    const { firstname, lastname, email, age, phone, website, address, specialization, experience, feesPerStudent, timings } = req.body;
+    const { firstname, lastname, email, age, phone, website, address, specialization, experience, feesPerStudent, timings, userId } = req.body;
 
     if (!firstname || !lastname || !email || !phone || !address || !specialization || !experience || !feesPerStudent || !timings || !age || !file) {
         return res.status(400).json("fill all the fields...")
@@ -88,7 +88,7 @@ exports.tutorapplyfunc = async (req, res) => {
         }
         else {
             const newTutor = new tutorModel({
-                firstname, lastname, email, age, phone, website, address, specialization, experience, feesPerStudent, timings, status: "pending", profile: file
+                userId, firstname, lastname, email, age, phone, website, address, specialization, experience, feesPerStudent, timings, status: "pending", profile: file
             })
             console.log("else part")
             await newTutor.save();
