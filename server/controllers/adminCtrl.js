@@ -23,17 +23,22 @@ exports.getAllTutorsController = async (req, res) => {
 exports.changeaccountController = async (req, res) => {
     try {
         const { tutorId, status } = req.body
-        const tutor = tutorModel.findByIdAndUpdate(tutorId, { status })
+        console.log(tutorId)
+        console.log(status)
+        const tutor = await tutorModel.findByIdAndUpdate(tutorId, { status })
+        // console.log(tutor)
+        console.log("after tut")
         const user = await userModel.findOne({ _id: tutor.userId })
+        console.log("after user")
         const notification = user.notification
         notification.push({
             type: "tutor-account-request-updated",
             message: `Your Tutor Account is ${status}`,
             onClickPath: '/notification'
         })
-        user.isTutor === 'approved' ? true : false
+        user.isTutor = status === 'approved' ? true : false
         await user.save()
-        res.status(200).json(user)
+        res.status(200).json(tutor)
     } catch (error) {
         res.status(400).send("account status error...")
     }

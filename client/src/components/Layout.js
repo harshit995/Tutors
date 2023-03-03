@@ -19,8 +19,30 @@ const Layout = ({ children }) => {
             navigate('/login')
         }
     }
+
+    //tutor menu
+    const tutorMenu = [
+        {
+            name: 'Home',
+            path: '/',
+            icon: "fa-solid fa-house"
+        },
+        {
+            name: 'Appointment',
+            path: '/appointments',
+            icon: "fa-solid fa-list"
+        },
+        {
+            name: 'Profile',
+            path: `/tutor/profile/${user?._id}`,
+            icon: "fa-solid fa-address-card"
+        },
+    ];
+
+    //tutor menu end
+
     //rendering menu list
-    const SidebarMenu = user?.isAdmin ? adminMenu : userMenu
+    const SidebarMenu = user?.isAdmin ? adminMenu : user?.isTutor ? tutorMenu : userMenu
     return (
         <>
             <div className="main">

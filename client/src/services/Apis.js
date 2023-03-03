@@ -43,6 +43,10 @@ export const getalltutorsfunc = async () => {
 export const statuschangefunc = async (data) => {
     return await commonrequest("POST", `${BASE_URL}/changeaccountstatus`, data, "");
 }
+
+export const gettutorinfofunc = async (id) => {
+    return await commonrequest("GET", `${BASE_URL}/gettutorinfo/${id}`, {});
+}
 // export const editfunc = async (id, data, header) => {
 //     return await commonrequest("PUT", `${BASE_URL}/user/edit/${id}`, data, header);
 // }

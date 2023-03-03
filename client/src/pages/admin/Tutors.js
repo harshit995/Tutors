@@ -12,24 +12,27 @@ const Tutors = () => {
 
     const [tutors, setTutors] = useState({});
 
-    const handleaccountstatus = async (doctorId, status) => {
-
-
-        const data = new FormData()
-        data.append("doctorId", doctorId)
-        data.append("status", status)
-
-        const response = await statuschangefunc(data)
-        if (response.status === 200) {
-            toast.success("Account updated....")
-        }
-    }
 
     const tutorsfunc = async () => {
         const response = await getalltutorsfunc()
         if (response.status === 200) {
             console.log(response)
             setTutors(response.data)
+        }
+    }
+
+    const handleaccountstatus = async (element, status) => {
+
+
+        const data = new FormData()
+        data.append("tutorId", element._id)
+        data.append("userId", element.userId)
+        data.append("status", status)
+
+        console.log(status)
+        const response = await statuschangefunc(data)
+        if (response.status === 200) {
+            toast.success("Account updated....")
         }
     }
 
@@ -69,7 +72,7 @@ const Tutors = () => {
                                                 <td className="img_parent">
                                                     <img style={{ width: "35px", borderRadius: "50%" }} src={`${BASE_URL}/uploads/${element.profile}`} alt="img" />
                                                 </td>
-                                                <td>{element.status === "pending" ? <Button variant="success" onClick={() => handleaccountstatus(element.userId, "approved")}>Approve</Button> : <Button variant="danger">Reject</Button>}</td>
+                                                <td>{element.status === "pending" ? <Button variant="success" onClick={() => handleaccountstatus(element, "approved")}>Approve</Button> : <Button variant="danger">Reject</Button>}</td>
                                             </tr>
 
                                         </>
