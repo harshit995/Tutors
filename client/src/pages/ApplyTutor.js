@@ -36,7 +36,6 @@ const ApplyTutor = () => {
 
     const navigate = useNavigate();
 
-
     // setInput Value
     const setInputValue = (e) => {
         const { name, value } = e.target;

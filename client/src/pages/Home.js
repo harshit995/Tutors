@@ -1,12 +1,15 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import Row from 'react-bootstrap/esm/Row';
 import { useNavigate } from 'react-router-dom';
-import { authContext } from '../components/context/ContextProvider';
+// import { authContext } from '../components/context/ContextProvider';
 import Layout from '../components/Layout';
+import TutorsList from '../components/TutorsList';
 import { usergetfunc } from '../services/Apis';
 
 const Home = () => {
     const navigate = useNavigate();
-    const { user, setUser } = useContext(authContext);
+    // const { user, setUser } = useContext(authContext);
+    const [tutors, setTutors] = useState([])
 
     const getUserdata = async () => {
         const response = await usergetfunc();
@@ -14,8 +17,9 @@ const Home = () => {
             navigate('/login')
         }
         else {
-            console.log("the data is..")
-            console.log(user)
+            console.log("the approved tutors are..")
+            console.log(response)
+            setTutors(response.data)
         }
     }
     useEffect(() => {
@@ -25,7 +29,10 @@ const Home = () => {
 
     return (
         <Layout>
-            this is home page
+            <h1 className='text-center p-2'>Home Page</h1>
+            <Row>
+                {tutors && tutors.map((tutor) => <TutorsList tutor={tutor} />)}
+            </Row>
         </Layout>
     )
 }

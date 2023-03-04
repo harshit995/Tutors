@@ -13,6 +13,8 @@ router.post('/getallnotification', Authenticate, controllers.notificationcontrol
 
 router.post('/deleteallnotification', Authenticate, controllers.deleteallnotificationcontroller)
 
+router.get('/getallapprovedtutors', Authenticate, controllers.getallapprovedtutorscontroller)
+
 
 router.get('/logout', (req, res) => {
     res.clearCookie('jwtoken', { path: '/' });

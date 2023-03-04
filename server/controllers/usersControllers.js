@@ -150,5 +150,14 @@ exports.deleteallnotificationcontroller = async (req, res) => {
     }
 }
 
+exports.getallapprovedtutorscontroller = async (req, res) => {
+    try {
+        const tutor = await tutorModel.find({ status: "approved" })
+        res.status(200).json(tutor)
+    } catch (error) {
+        console.log("error in approved tutors list..")
+    }
+}
+
 
 

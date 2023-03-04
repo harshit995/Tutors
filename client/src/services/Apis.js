@@ -9,7 +9,7 @@ export const registerfunc = async (data, header) => {
 //     return await commonrequest("GET", `${BASE_URL}/user/details?search=${search}&gender=${gender}&activity=${activity}&sort=${sort}`, "");
 // }
 export const usergetfunc = async () => {
-    return await commonrequest("GET", `${BASE_URL}/getuserdata`, {});
+    return await commonrequest("GET", `${BASE_URL}/getallapprovedtutors`, {});
 }
 
 export const loginfunc = async (data) => {
@@ -46,6 +46,10 @@ export const statuschangefunc = async (data) => {
 
 export const gettutorinfofunc = async (id) => {
     return await commonrequest("GET", `${BASE_URL}/gettutorinfo/${id}`, {});
+}
+
+export const updatetutorinfofunc = async (id, data, header) => {
+    return await commonrequest("PUT", `${BASE_URL}/updatetutorinfo/${id}`, data, header);
 }
 // export const editfunc = async (id, data, header) => {
 //     return await commonrequest("PUT", `${BASE_URL}/user/edit/${id}`, data, header);
