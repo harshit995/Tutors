@@ -11,9 +11,24 @@ import Users from "./pages/admin/Users";
 import Tutors from "./pages/admin/Tutors";
 import Profile from "./pages/tutor/Profile";
 import BookingPage from "./pages/BookingPage";
+import { getRefreshToken } from "./services/Apis";
+import { useContext, useEffect } from "react";
+import { authContext } from "./components/context/ContextProvider";
+
 
 
 function App() {
+  const { user, setUser } = useContext(authContext);
+  useEffect(() => {
+    async function getData() {
+      const response = await getRefreshToken();
+      if (response.status == 200) {
+        setUser({ ...response.data, token: response.data.token, isAuthenticated: true });
+      }
+      console.log("theUserIs")
+    }
+    getData();
+  }, [])
   return (
     <>
 
@@ -30,7 +45,7 @@ function App() {
       </Routes>
 
     </>
-  );
+  )
 }
 
 export default App;

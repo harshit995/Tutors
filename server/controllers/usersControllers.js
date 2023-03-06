@@ -68,6 +68,21 @@ exports.loginfunc = async (req, res) => {
     }
 }
 
+exports.getRefreshToken = async (req, res) => {
+    console.log("__________________________________")
+    console.log(req.userID)
+    const user = await userModel.findOne({ _id: req.userID })
+    token = await user.generateAuthToken();
+    res.cookie("jwtoken", token, {
+        expires: new Date(Date.now() + 2512000000),
+        httpOnly: true
+    })
+    console.log(user)
+    console.log("user")
+    user.password = undefined;
+    res.status(200).json(user)
+}
+
 exports.getuserdata = async (req, res) => {
     res.send(req.rootuser)
 }

@@ -38,7 +38,7 @@ const Login = () => {
             if (response.status === 200) {
                 setEmail("")
                 setPassword("")
-                setUser({ ...response.data })
+                setUser({ ...response.data, isAuthenicated: true })
                 console.log("user is..")
                 console.log(user)
                 navigate('/')

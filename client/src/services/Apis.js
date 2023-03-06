@@ -1,5 +1,8 @@
+import { authContext } from "../components/context/ContextProvider";
 import { commonrequest } from "../services/ApiCall"
-import { BASE_URL } from "../services/helper"
+import { useContext } from "react";
+import { BASE_URL } from "../services/helper";
+
 
 export const registerfunc = async (data, header) => {
     return await commonrequest("POST", `${BASE_URL}/register`, data, header);
@@ -14,6 +17,10 @@ export const usergetfunc = async (search) => {
 
 export const tutorgetfunc = async (id) => {
     return await commonrequest("POST", `${BASE_URL}/gettutorbyid/${id}`, {});
+}
+
+export const getRefreshToken = async () => {
+    return await commonrequest("GET", `${BASE_URL}/getrefreshtoken`, "");
 }
 
 export const loginfunc = async (data) => {
