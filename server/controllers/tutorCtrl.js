@@ -6,7 +6,7 @@ exports.gettutorinfocontroller = async (req, res) => {
     try {
         const userId = id
         const tutor = await tutorModel.findOne({ userId: userId })
-        console.log("this id is..")
+
         console.log(userId)
         res.status(200).json(tutor)
     } catch (error) {
@@ -36,7 +36,7 @@ exports.updatetutorinfocontroller = async (req, res) => {
 exports.gettutorbyidcontroller = async (req, res) => {
     const { id } = req.params
     try {
-        console.log(id)
+
         const tutor = await tutorModel.findOne({ _id: id })
         res.status(200).json(tutor)
     } catch (error) {
