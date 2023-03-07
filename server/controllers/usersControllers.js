@@ -69,7 +69,6 @@ exports.loginfunc = async (req, res) => {
 }
 
 exports.getRefreshToken = async (req, res) => {
-    console.log("__________________________________")
     console.log(req.userID)
     const user = await userModel.findOne({ _id: req.userID })
     token = await user.generateAuthToken();
