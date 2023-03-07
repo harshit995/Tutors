@@ -50,7 +50,7 @@ exports.loginfunc = async (req, res) => {
                 res.status(400).json("incorrect details...")
             } else {
                 token = await user.generateAuthToken();
-                console.log("the token is...", token)
+                // console.log("the token is...", token)
 
                 res.cookie("jwtoken", token, {
                     expires: new Date(Date.now() + 2512000000),
@@ -69,15 +69,15 @@ exports.loginfunc = async (req, res) => {
 }
 
 exports.getRefreshToken = async (req, res) => {
-    console.log(req.userID)
+    // console.log(req.userID)
     const user = await userModel.findOne({ _id: req.userID })
     token = await user.generateAuthToken();
     res.cookie("jwtoken", token, {
         expires: new Date(Date.now() + 2512000000),
         httpOnly: true
     })
-    console.log(user)
-    console.log("user")
+    // console.log(user)
+    // console.log("user")
     user.password = undefined;
     res.status(200).json(user)
 }
@@ -104,11 +104,10 @@ exports.tutorapplyfunc = async (req, res) => {
             const newTutor = new tutorModel({
                 userId, firstname, lastname, email, age, phone, website, address, specialization, experience, feesPerStudent, timings, status: "pending", profile: file
             })
-            console.log("else part")
+
             await newTutor.save();
-            console.log("after save")
-            console.log("new tutor is ..")
-            console.log(newTutor)
+
+            // console.log(newTutor)
             const adminUser = await userModel.findOne({ isAdmin: true })
             const notification = adminUser.notification
             notification.push({
@@ -149,10 +148,10 @@ exports.notificationcontroller = async (req, res) => {
 
 exports.deleteallnotificationcontroller = async (req, res) => {
     try {
-        console.log("before delete..")
+
         const user = await userModel.findOne({ _id: req.body.userId });
-        console.log("after...")
-        console.log(req.body.userId)
+
+        // console.log(req.body.userId)
         user.seennotification = [];
         user.notification = [];
         const updatedUser = await user.save();
