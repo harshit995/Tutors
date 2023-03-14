@@ -66,8 +66,6 @@ const ApplyTutor = () => {
             toast.error("Mobile is Required !")
         } else if (age === "") {
             toast.error("Age is Required !")
-        } else if (image === "") {
-            toast.error("Profile is Required !")
         } else if (address === "") {
             toast.error("location is Required !")
         } else {
@@ -185,7 +183,7 @@ const ApplyTutor = () => {
                                 <Form.Control type="text" name='experience' value={inputdata.experience} onChange={setInputValue} placeholder='Enter Your experience' />
                             </Form.Group>
                             <Form.Group className="mb-3 col-lg-6" >
-                                <Form.Label>Enter Your feesPerStudent</Form.Label>
+                                <Form.Label>Enter Your fees Per Student</Form.Label>
                                 <Form.Control type="text" name='feesPerStudent' value={inputdata.feesPerStudent} onChange={setInputValue} placeholder='Enter Your feesPerStudent' />
                             </Form.Group>
                             <Form.Group className="mb-3 col-lg-6" >
