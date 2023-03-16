@@ -1,21 +1,32 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Layout from '../components/Layout'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { authContext } from '../components/context/ContextProvider';
-import { getdeletefunc, getmarkallreadfunc } from '../services/Apis';
+import { getRefreshToken, getdeletefunc, getmarkallreadfunc } from '../services/Apis';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 
 const NotificationPage = () => {
-    const { user } = useContext(authContext);
+    const { user, setUser } = useContext(authContext);
+    useEffect(() => {
+        async function getData() {
+            const response = await getRefreshToken();
+            if (response.status == 200) {
+                setUser({ ...response.data, token: response.data.token, isAuthenticated: true });
+            }
+            console.log("theUserIs")
+        }
+        getData();
+    }, [])
+    // const { user } = useContext(authContext);
     const [key, setKey] = useState('home');
 
     let navigate = useNavigate();
 
     console.log("noti  is...")
-    console.log(user.seennotification)
+    // console.log(user.seennotification)
 
     const handlemarkallread = async () => {
 
@@ -38,10 +49,10 @@ const NotificationPage = () => {
         const userId = user._id
         const data = new FormData()
         data.append("userId", userId)
-        console.log("aftter append..")
-        console.log(data)
-        console.log("now id is...")
-        console.log(userId)
+        // console.log("aftter append..")
+        // console.log(data)
+        // console.log("now id is...")
+        // console.log(userId)
 
         const response = await getdeletefunc(data)
         if (response.status === 200) {
@@ -49,6 +60,7 @@ const NotificationPage = () => {
         }
 
     }
+    // const { user, setUser } = useContext(authContext);
 
     return (
         <Layout>

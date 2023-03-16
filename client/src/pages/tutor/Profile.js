@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
 import { authContext } from '../../components/context/ContextProvider'
 import Layout from '../../components/Layout'
-import { gettutorinfofunc, updatetutorinfofunc } from '../../services/Apis'
+import { getRefreshToken, gettutorinfofunc, updatetutorinfofunc } from '../../services/Apis'
 import 'react-toastify/dist/ReactToastify.css';
 import Card from "react-bootstrap/Card"
 import Button from 'react-bootstrap/Button';
@@ -16,8 +16,9 @@ import { BASE_URL } from '../../services/helper'
 
 
 const Profile = () => {
-
-    const { user } = useContext(authContext)
+    const { id } = useParams();
+    const { user, setUser } = useContext(authContext)
+    const [ids, setIds] = useState(id)
 
     const [tutor, setTutor] = useState(null)
     const [inputdata, setInputdata] = useState({
@@ -32,7 +33,7 @@ const Profile = () => {
         experience: "",
         feesPerStudent: "",
         timings: "",
-        userId: user._id
+        userId: ids
     });
 
     console.log(inputdata)
@@ -55,12 +56,14 @@ const Profile = () => {
     }
 
 
-    const { id } = useParams();
+    // const { id } = useParams();
 
     const submitUserData = async (e) => {
         e.preventDefault();
 
-        const userId = user._id
+        // const userId = user._id
+        const userId = ids
+        // const userId = id
         const { firstname, lastname, email, age, phone, website, address, specialization, experience, feesPerStudent, timings } = inputdata;
 
         if (firstname === "") {
@@ -93,14 +96,17 @@ const Profile = () => {
             data.append("doc_profile", image || imgdata)
             data.append("timings", timings)
             data.append("userId", userId)
+            // data.append("userId", userId)
 
             const config = {
                 "Content-Type": "multipart/form-data"
             }
-            console.log(userId)
-            const response = await updatetutorinfofunc(id, data, config);
             console.log("THE UPDATED DATA IS....")
-            console.log(response)
+            console.log(userId)
+            console.log(data)
+            const response = await updatetutorinfofunc(id, data, config);
+            console.log("THE UPDATED DATA IS")
+            console.log(id)
             console.log("The dtaa is above..")
             if (response.status === 200) {
 
@@ -126,19 +132,30 @@ const Profile = () => {
 
     const gettutorinfo = async () => {
         const response = await gettutorinfofunc(id);
-        console.log(id)
-        console.log("the profile data is..")
-        console.log(response.data)
+        // console.log(id)
+        // console.log("the profile data is..")
+        // console.log(response.data)
         if (response.status === 200) {
             setTutor(response.data)
             setInputdata(response.data)
             setImgdata(response.data.profile)
             toast.success("Profile Viewed")
+
         }
     }
 
     useEffect(() => {
+        async function getData() {
+            const response = await getRefreshToken();
+            if (response.status == 200) {
+                setUser({ ...response.data, token: response.data.token, isAuthenticated: true });
+            }
+            console.log("theUserIs")
+            // setInputdata({ ...response.data, userId: response.data._id });
+        }
+        getData();
         gettutorinfo()
+
     }, [])
 
 

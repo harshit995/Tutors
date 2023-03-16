@@ -20,12 +20,16 @@ exports.updatetutorinfocontroller = async (req, res) => {
     const { firstname, lastname, email, age, phone, website, address, specialization, experience, feesPerStudent, timings, doc_profile } = req.body;
     const file = req.file ? req.file.filename : doc_profile
     try {
-
+        console.log("the id is")
+        console.log(firstname)
+        console.log(id)
         const tutor = await tutorModel.findOneAndUpdate({ userId: id }, {
             firstname, lastname, email, age, phone, website, address, specialization, experience, feesPerStudent, timings, profile: file
         }, {
             new: true
         });
+        console.log("updated id is")
+        console.log(id)
         await tutor.save()
         res.status(200).json(tutor)
     } catch (error) {
