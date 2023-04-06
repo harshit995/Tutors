@@ -32,3 +32,14 @@ exports.updatetutorinfocontroller = async (req, res) => {
         res.status(200).json("error in updating details...")
     }
 }
+
+exports.gettutorbyidcontroller = async (req, res) => {
+    const { id } = req.params
+    try {
+        console.log(id)
+        const tutor = await tutorModel.findOne({ _id: id })
+        res.status(200).json(tutor)
+    } catch (error) {
+        res.status(200).json("error ...")
+    }
+}

@@ -151,8 +151,9 @@ exports.deleteallnotificationcontroller = async (req, res) => {
 }
 
 exports.getallapprovedtutorscontroller = async (req, res) => {
+    const search = req.query.search || ""
     try {
-        const tutor = await tutorModel.find({ status: "approved" })
+        const tutor = await tutorModel.find({ status: "approved", address: { $regex: search, $options: "i" } })
         res.status(200).json(tutor)
     } catch (error) {
         console.log("error in approved tutors list..")

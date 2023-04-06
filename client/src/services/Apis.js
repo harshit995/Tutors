@@ -8,8 +8,12 @@ export const registerfunc = async (data, header) => {
 // export const usergetfunc = async (search, gender, activity, sort) => {
 //     return await commonrequest("GET", `${BASE_URL}/user/details?search=${search}&gender=${gender}&activity=${activity}&sort=${sort}`, "");
 // }
-export const usergetfunc = async () => {
-    return await commonrequest("GET", `${BASE_URL}/getallapprovedtutors`, {});
+export const usergetfunc = async (search) => {
+    return await commonrequest("GET", `${BASE_URL}/getallapprovedtutors?search=${search}`, {});
+}
+
+export const tutorgetfunc = async (id) => {
+    return await commonrequest("POST", `${BASE_URL}/gettutorbyid/${id}`, {});
 }
 
 export const loginfunc = async (data) => {

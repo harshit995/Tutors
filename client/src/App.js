@@ -10,6 +10,7 @@ import NotificationPage from "./pages/NotificationPage";
 import Users from "./pages/admin/Users";
 import Tutors from "./pages/admin/Tutors";
 import Profile from "./pages/tutor/Profile";
+import BookingPage from "./pages/BookingPage";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path='/notification' element={<NotificationPage />} />
         <Route path='/admin/users' element={<Users />} />
         <Route path='/tutor/profile/:id' element={<Profile />} />
+        <Route path='/tutor/book-appointment/:id' element={<BookingPage />} />
         <Route path='/admin/tutors' element={<Tutors />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />

@@ -22,7 +22,7 @@ const TutorsList = ({ tutor }) => {
                 <ListGroup.Item>Experience : {tutor.experience}</ListGroup.Item>
                 <ListGroup.Item>Timings : {tutor.timings}</ListGroup.Item>
                 <ListGroup.Item>Fees Per Student : {tutor.feesPerStudent}</ListGroup.Item>
-                <ListGroup.Item className='text-center'><NavLink className='text-decoration-none' to={`/book-appointment/${tutor._id}`}>Book Tutor</NavLink></ListGroup.Item>
+                <ListGroup.Item className='text-center'><NavLink className='text-decoration-none' to={`/tutor/book-appointment/${tutor._id}`}>Book Tutor</NavLink></ListGroup.Item>
             </ListGroup>
         </Card>
     )
