@@ -172,6 +172,3 @@ exports.getallapprovedtutorscontroller = async (req, res) => {
         console.log("error in approved tutors list..")
     }
 }
-
-
-

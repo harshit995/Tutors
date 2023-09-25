@@ -21,8 +21,8 @@ const Home = () => {
             navigate('/login')
         }
         else {
-            console.log("the approved tutors are..")
-            console.log(response)
+            // console.log("the approved tutors are..")
+            // console.log(response)
             setTutors(response.data)
         }
     }

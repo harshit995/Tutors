@@ -27,6 +27,7 @@ const NotificationPage = () => {
 
     console.log("noti  is...")
     // console.log(user.seennotification)
+    console.log(user)
 
     const handlemarkallread = async () => {
 

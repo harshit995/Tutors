@@ -16,7 +16,7 @@ const Tutors = () => {
     const tutorsfunc = async () => {
         const response = await getalltutorsfunc()
         if (response.status === 200) {
-            console.log(response)
+            // console.log(response)
             setTutors(response.data)
         }
     }

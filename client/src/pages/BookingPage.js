@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { tutorgetfunc } from '../services/Apis'
+// import { authContext } from '../components/context/ContextProvider'
 
 
 const BookingPage = () => {

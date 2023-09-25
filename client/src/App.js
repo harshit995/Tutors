@@ -25,9 +25,11 @@ function App() {
       if (response.status == 200) {
         setUser({ ...response.data, token: response.data.token, isAuthenticated: true });
       }
-      console.log("theUserIs")
+      // console.log("theU serIs")
+      // console.log({ user })
     }
     getData();
+
   }, [])
   return (
     <>

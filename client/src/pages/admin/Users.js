@@ -16,7 +16,7 @@ const Users = () => {
     const usersfunc = async () => {
         const response = await getallusersfunc()
         if (response.status === 200) {
-            console.log(response)
+            // console.log(response)
             setUser(response.data)
         }
     }

@@ -145,15 +145,14 @@ const Profile = () => {
     }
 
     useEffect(() => {
-        async function getData() {
-            const response = await getRefreshToken();
-            if (response.status == 200) {
-                setUser({ ...response.data, token: response.data.token, isAuthenticated: true });
-            }
-            console.log("theUserIs")
-            // setInputdata({ ...response.data, userId: response.data._id });
-        }
-        getData();
+        // async function getData() {
+        //     const response = await getRefreshToken();
+        //     if (response.status == 200) {
+        //         setUser({ ...response.data, token: response.data.token, isAuthenticated: true });
+        //     }
+        //    
+        // }
+        // getData();
         gettutorinfo()
 
     }, [])
